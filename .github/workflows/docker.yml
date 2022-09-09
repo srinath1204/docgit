@@ -1,4 +1,4 @@
- name: Build & Publish
+name: Build & Publish
 
 on:
   push:
@@ -43,10 +43,10 @@ jobs:
           name: build
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
-         with:
+        with:
           registry: ghcr.io
-          username: ${{ secrets.DOCKER_HUB_USERNAME }} 
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN } }
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       - name: Build and Push Docker Images
         run: |
           export CURRENT_BRANCH=${GITHUB_REF#refs/heads/}
