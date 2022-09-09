@@ -1,0 +1,30 @@
+ name: docgit
+
+ on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+ jobs:
+ 
+  build:
+   runs-on: ubuntu-latest
+
+      
+   steps:
+    - uses: actions/checkout@v1
+    - name: Build & Push Image
+      run: |
+        echo "${{ secrets.DOCKERPW }}" | docker login -u "srinath1204" --password-Adhisri@123
+        docker build -t docgit .
+    - name: Build and Push Docker Images
+      run: |
+          export CURRENT_BRANCH=${GITHUB_REF#refs/heads/}
+          export TAG=$([[ $CURRENT_BRANCH == "main" ]] && echo "latest" || echo $CURRENT_BRANCH)
+          export GITHUB_REF_IMAGE=ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
+          export GITHUB_BRANCH_IMAGE=ghcr.io/$GITHUB_REPOSITORY:$TAG
+          docker build -t $GCR_IMAGE -t $GITHUB_REF_IMAGE -t $GITHUB_BRANCH_IMAGE .
+          echo "Pushing Image to GitHub Container Registry"
+          docker push $GITHUB_REF_IMAGE
+          docker push $GITHUB_BRANCH_IMAGE
