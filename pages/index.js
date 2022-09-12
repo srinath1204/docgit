@@ -7,7 +7,7 @@ export default function Home() {
             <div className="xl:mx-auto xl:container py-20 2xl:px-0 px-6">
                 <div className="lg:flex items-center justify-between">
                     <div className=" lg:w-1/2 w-full">
-                        <p className="text-base leading-4 text-gray-600">Choose your plan</p>
+                        <p className="text-base leading-4 text-gray-600">Choose your</p>
                         <h1 role="heading" className="md:text-5xl text-3xl font-bold leading-10 mt-3 text-gray-800">
                             Our pricing plan
                         </h1>
